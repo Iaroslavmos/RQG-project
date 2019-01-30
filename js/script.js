@@ -4,6 +4,7 @@ var green;
 var blue;
 var seenQuotes = [];
 
+//An array of object literals
 var quotes = [
     {
       quote : 'The only source of knowledge is experience.',
@@ -52,11 +53,13 @@ var quotes = [
   }
 ];
 
-function print(quote) {
+ //This function prints message to the page. It is sort of extra here but I used it to practice functions inside functions.
+function print(message) {
   var outputDiv = document.getElementById('quote-box');
-  outputDiv.innerHTML = quote;
+  outputDiv.innerHTML = message;
 }
 
+//A function generating a random object literal from an array
 function getRandomQuote () {
     var randomNumber = Math.floor(Math.random * (quotes.length));
     var spliceQuote = quotes.splice(randomNumber, 1)[0];
@@ -68,6 +71,7 @@ function getRandomQuote () {
     return spliceQuote;
 }
 
+//A function generating a random colour
 function randomColourGenerator() {
   red = Math.floor(Math.random() * 256);
   green = Math.floor(Math.random() * 256);
@@ -76,6 +80,7 @@ function randomColourGenerator() {
   return randomColour;
 }
 
+//A function which takes previously generated random object literal (quotes, source, citation, year and tag) and prints it to the page every time the button is clicked.
 function printQuote () {
    var result = getRandomQuote();
    var message = "<p class='quote'>" + result.quote + "</p>" + "<p class='source'>" + result.source + '';
@@ -95,12 +100,18 @@ function printQuote () {
      message += '';
    }
    message += "</p>";
+//calling function to print message
    print(message);
+//calling function to generate colour
    randomColourGenerator();
+//This method updates background colour
    document.getElementById('backgroundcolor').style.background = randomColourGenerator();
 }
 
+//This method changes quotes every 30 seconds
 window.setInterval(printQuote, 3000);
+
+//This event listener activates the button "Show another quote" with every click, and hence calls the "printQuote" function
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
 //For randomColourGenerator I modified and created an <id> attribute in the HTML file. Don't know if that was the right and only way but it works.
